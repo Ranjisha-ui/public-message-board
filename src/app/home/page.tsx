@@ -1,7 +1,20 @@
-export default function HomePage() {
+import { CONTENTS } from "./constants/contents";
+import { theme } from "./constants/theme/theme";
+import MainHeader from "./components/mainHeader";
+
+export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-2xl font-semibold">Public Message Board</h1>
+    <main
+      style={{
+        minHeight: "100vh",
+        backgroundColor: theme.colors.background,
+        color: theme.colors.textPrimary,
+        fontFamily: theme.fonts.body,
+        padding: "2rem",
+      }}
+    >
+      {/* 🔵 Top Banner Header */}
+        <MainHeader />
     </main>
   );
 }
