@@ -1,7 +1,12 @@
+// src/app/components/mainHeader.tsx
 import { CONTENTS } from "../constants/contents";
 import { theme } from "../constants/theme/theme";
 
-export default function MainHeader() {
+interface MainHeaderProps {
+  onOpenAddModal: () => void; // Prop to trigger modal from parent
+}
+
+export default function MainHeader({ onOpenAddModal }: MainHeaderProps) {
   return (
     <header
       style={{
@@ -19,16 +24,20 @@ export default function MainHeader() {
         {CONTENTS.ACTIONS.SENTENCE_ADD_MESSAGE}
       </span>
 
-      <span
+      <button
+        onClick={onOpenAddModal}
         style={{
-          color: theme.colors.textPrimary,
+          color: theme.colors.primary, // Blue accent to make it stand out
           fontWeight: 800,
           textDecoration: "underline",
           cursor: "pointer",
+          background: "none",
+          border: "none",
+          padding: 0,
         }}
       >
         {CONTENTS.ACTIONS.OPEN_FORM}
-      </span>
+      </button>
     </header>
   );
 }
