@@ -21,6 +21,10 @@ export const CONTENTS = {
     NO_MESSAGES: "No messages yet. Be the first to post!",
   },
 
+
   LOADING:"Loading messages...",
-  ERROR: "An error occurred while fetching messages.",
+  ERRORS: {
+    FAILED_TO_ADD: "Failed to add message. Please try again.",
+    FAILED_TO_LOAD: "Failed to load messages. Please refresh the page.",
+  },
 };

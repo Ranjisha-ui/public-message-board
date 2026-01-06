@@ -1,14 +1,15 @@
-// src/app/components/AddMessageModal.tsx
 "use client";
 
 import { useState } from "react";
 import Modal from "./Modal";
 import { theme } from "../constants/theme/theme";
+import { createMessage } from "@/app/lib/api";
+import { CONTENTS } from "../constants/contents";
 
 interface AddMessageModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: () => void; // To refresh messages after adding
+  onSuccess: () => void;
 }
 
 export default function AddMessageModal({
@@ -23,8 +24,9 @@ export default function AddMessageModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!name.trim() || !content.trim()) {
-      setError("Both name and message are required.");
+      setError(CONTENTS.ERRORS.FAILED_TO_ADD);
       return;
     }
 
@@ -32,23 +34,17 @@ export default function AddMessageModal({
     setError("");
 
     try {
-      const res = await fetch("/api/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name.trim(), content: content.trim() }),
+      await createMessage({
+        name: name.trim(),
+        message: content.trim(),
       });
 
-      if (res.ok) {
-        setName("");
-        setContent("");
-        onClose();
-        onSuccess(); // Trigger refresh of message list
-      } else {
-        const data = await res.json();
-        setError(data.error || "Failed to add message.");
-      }
-    } catch (err) {
-      setError("Network error. Please try again.");
+      setName("");
+      setContent("");
+      onClose();
+      onSuccess();
+    } catch {
+      setError(CONTENTS.ERRORS.FAILED_TO_ADD);
     } finally {
       setLoading(false);
     }
@@ -67,18 +63,17 @@ export default function AddMessageModal({
           </label>
           <input
             id="name"
-            type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border outline-none transition-colors"
             style={{
-              backgroundColor: "#374151",
+              backgroundColor: theme.colors.background,
               borderColor: theme.colors.border,
-              color: theme.colors.textPrimary,
+              color: theme.colors.primary,
             }}
             placeholder="Enter your name"
-            required
             disabled={loading}
+            required
           />
         </div>
 
@@ -92,23 +87,23 @@ export default function AddMessageModal({
           </label>
           <textarea
             id="message"
+            rows={5}
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            rows={5}
             className="w-full px-4 py-3 rounded-lg border outline-none resize-none transition-colors"
             style={{
-              backgroundColor: "#374151",
+              backgroundColor: theme.colors.background,
               borderColor: theme.colors.border,
-              color: theme.colors.textPrimary,
+              color: theme.colors.primary,
             }}
             placeholder="Write your message here..."
-            required
             disabled={loading}
+            required
           />
         </div>
 
         {error && (
-          <p className="text-red-400 text-sm" style={{ color: "#f87171" }}>
+          <p className="text-sm" style={{ color: "#f87171" }}>
             {error}
           </p>
         )}
@@ -123,6 +118,7 @@ export default function AddMessageModal({
           >
             Cancel
           </button>
+
           <button
             type="submit"
             disabled={loading}
