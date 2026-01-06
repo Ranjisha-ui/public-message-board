@@ -1,35 +1,44 @@
+// src/app/home/constants/index.ts
+
 export const CONTENTS = {
-  APP_TITLE: "Public Message Board",
-  APP_SUBTITLE: "Share your thoughts with the world!",
+  // Page title and main headings
+  PAGE_TITLE: "Public Message Board",
+  MAIN_HEADER: "Welcome to the Public Message Board",
+  SUB_HEADER: "Share your thoughts anonymously with everyone",
+  APP_TITLE: "Have any message to say?",
+  // Button texts
+  ADD_MESSAGE_BUTTON: "Add New Message",
+  CLOSE_BUTTON: "Close",
+  SUBMIT_BUTTON: "Submit",
 
-  ACTIONS: {
-    SENTENCE_ADD_MESSAGE: "Click here to let your message be seen!!.",
-    OPEN_FORM: "Add Message",
-    SUBMIT: "Submit",
-    CANCEL: "Cancel",
-    CLOSE: "Close",
-    VIEW: "View",
-  },
-  FORM: {
-    NAME_PLACEHOLDER: "Your Name",
-    MESSAGE_PLACEHOLDER: "Write you message here...",
-    NAME_LABEL: "Name",
+  // Add Message Modal
+  ADD_MODAL: {
+    TITLE: "Add New Message",
+    NAME_LABEL: "Your Name (optional)",
+    NAME_PLACEHOLDER: "Enter your name...",
     MESSAGE_LABEL: "Message",
+    MESSAGE_PLACEHOLDER: "Write your message here...",
   },
 
-  EMPTY_STATE: {
-    NO_MESSAGES: "No messages yet. Be the first to post!",
-  },
+  // View Message Modal
   VIEW_MODAL: {
-    TITLE: "Full Message",
+    TITLE: "Message Details",
     FROM_LABEL: "From",
     MESSAGE_LABEL: "Message",
     POSTED_ON: "Posted on",
   },
 
-  LOADING:"Loading messages...",
-  ERRORS: {
-    FAILED_TO_ADD: "Failed to add message. Please try again.",
-    FAILED_TO_LOAD: "Failed to load messages. Please refresh the page.",
+  // Message Grid / List
+  GRID: {
+    NO_MESSAGES: "No messages yet. Be the first to post one!",
   },
-};
+
+  // Success / Error messages (optional, for later)
+  SUCCESS: "Message posted successfully!",
+  ERROR: "Something went wrong. Please try again.",
+  ANONYMOUS: "Anonymous",
+  FORM: {
+    SUBMIT: "Submit",
+    SUBMITTING: "Submitting...",
+  },
+} as const;

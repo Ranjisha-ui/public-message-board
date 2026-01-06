@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #f8d2d2;
     --foreground: #ededed;
   }
 }
@@ -30,4 +30,210 @@ body {
   margin: 0;
   padding: 0;
 }
+/* ============================= */
+/* Global Layout & Base Styles   */
+/* ============================= */
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Page containers */
+.page-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Header */
+.page-header {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.page-subtitle {
+  font-size: 1.25rem;
+}
+
+/* Grid */
+.message-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  background-color: #ee9191; /* offwhite grid background */
+  padding: 2rem;
+}
+
+/* Utility */
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+.view-messages {
+  margin-top: 1rem;
+  display: inline-block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.view-label {
+  font-size: 0.875rem;
+  color: #111010;
+}
+.view-message {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.view-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.view-message-text {
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.view-date {
+  font-size: 0.875rem;
+  color: #0c0b0b;
+}
+/* Nav Bar */
+.page-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: #f79494; /* white background */
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-left {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #090909; /* black text */
+}
+
+.navbar-right {
+  /* nothing special, button already styled */
+}
+/* Message Card */
+.message-card {
+  background-color: #f19393; /* off-white */
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #0f0f0f;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header with icon + name */
+.message-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.message-card-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Name text */
+.message-card-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111111; /* black */
+}
+
+/* Message body */
+.message-card-text {
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  color: #111111; /* black */
+}
+
+/* Date */
+.message-card-date {
+  font-size: 0.875rem;
+  text-align: right;body {
+  background-color: #ffffff; /* white page background */
+  color: #111111; /* default text black */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Grid */
+.message-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Make grid container background off-white optional */
+main {
+  background-color: #f9f9f9; /* subtle off-white behind grids */
+  padding: 2rem 0;
+}
+
+  color: #666666;
+}
+/* Message Card */
+.message-card {
+  background-color: #fefefe; /* off-white */
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header with icon + name */
+.message-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.message-card-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Name text */
+.message-card-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111111; /* black */
+}
+
+/* Message body */
+.message-card-text {
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  color: #111111; /* black */
+}
+
+/* Date */
+.message-card-date {
+  font-size: 0.875rem;
+  text-align: right;
+  color: #666666;
+}

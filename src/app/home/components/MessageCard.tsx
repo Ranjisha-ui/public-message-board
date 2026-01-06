@@ -1,65 +1,54 @@
-import { theme } from "../constants/theme/theme";
+// src/app/home/components/MessageCard.tsx
+
 import { CONTENTS } from "../constants/contents";
 
-interface Post {
+// Props
+interface MessageCardProps {
   id: number;
-  name: string;
+  name: string | null;
   message: string;
   createdAt: string;
+  onClick: () => void;
 }
 
-interface MessageCardProps {
-  post: Post;
-  onView: () => void;
-}
+// Array of icon paths (replace names if yours are different)
+const icons = [
+  "/icons/i1.png",
+  "/icons/i2.png",
+  "/icons/i3.png",
+  "/icons/i4.png",
+  "/icons/i5.png",
+  "/icons/i6.png",
+  "/icons/i7.png",
+  "/icons/i8.png",
+  "/icons/i9.png",
+  "/icons/i10.png",
+];
 
-export default function MessageCard({ post, onView }: MessageCardProps) {
-  // Short preview with line clamp for better readability
-  const preview = post.message.length > 150 
-    ? post.message.slice(0, 150) + "..." 
-    : post.message;
+export default function MessageCard({
+  id,
+  name,
+  message,
+  createdAt,
+  onClick,
+}: MessageCardProps) {
+  // Choose a random icon per message
+  const icon = icons[id % icons.length]; // stable per message
 
   return (
-    <div
-      className="p-6 rounded-2xl transition-all hover:-translate-y-1 hover:shadow-xl"
-      style={{
-        backgroundColor: theme.colors.surface,
-        borderRadius: theme.radius.xl,
-        boxShadow: theme.shadows.md,
-        transition: `all ${theme.transitions.normal}`,
-      }}
-    >
-      <div className="flex justify-between items-start mb-4">
-        <h3
-          className="text-xl font-bold"
-          style={{ color: theme.colors.textPrimary }}
-        >
-          {post.name}
+    <div className="message-card" onClick={onClick}>
+      <div className="message-card-header">
+        <img src={icon} alt="user icon" className="message-card-icon" />
+        <h3 className="message-card-name">
+          {name || CONTENTS.ANONYMOUS}
         </h3>
-        <span
-          className="text-sm opacity-80"
-          style={{ color: theme.colors.textSecondary }}
-        >
-          {new Date(post.createdAt).toLocaleDateString()}
-        </span>
       </div>
 
-      <p
-        className="mb-6 leading-relaxed line-clamp-4"
-        style={{ color: theme.colors.textSecondary }}
-      >
-        {preview}
-      </p>
+      <p className="message-card-text">{message}</p>
 
-      <button
-        onClick={onView}
-        className="px-6 py-3 rounded-xl font-medium text-white transition-all hover:scale-105"
-        style={{
-          backgroundColor: theme.colors.primary,
-        }}
-      >
-        {CONTENTS.ACTIONS.VIEW}
-      </button>
+      <p className="message-card-date">
+        {CONTENTS.VIEW_MODAL.POSTED_ON} {new Date(createdAt).toLocaleString()}
+      </p>
     </div>
   );
 }

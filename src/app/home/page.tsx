@@ -1,99 +1,115 @@
+// src/app/home/page.tsx
+
 "use client";
 
 import { useState, useEffect } from "react";
-import { theme } from "./constants/theme/theme";
-import { CONTENTS } from "./constants/contents";
-import MainHeader from "./components/mainHeader";
-import AddMessageModal from "./components/AddMessageModal";
-import MessageCard from "./components/MessageCard";
-import ViewMessageModal from "./components/ViewMessageModal";
 
-interface Post {
+import Button from "./ui/Button";
+import Modal from "./ui/Modal";
+import MessageGrid from "./components/MessageGrid";
+import MessageForm from "./components/MessageForm";
+
+import { CONTENTS } from "./constants/contents";
+
+interface Message {
   id: number;
-  name: string;
+  name: string | null;
   message: string;
   createdAt: string;
 }
+<h1 className="nav-left">{CONTENTS.APP_TITLE}</h1>
 
-export default function Home() {
-  const [isAddOpen, setIsAddOpen] = useState(false);
-  const [isViewOpen, setIsViewOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+// View-only component (NO styling here)
+function ViewMessageContent({ post }: { post: Message }) {
+  return (
+    <div className="view-message">
+      <div>
+        <p className="view-label">{CONTENTS.VIEW_MODAL.FROM_LABEL}</p>
+        <p className="view-name">
+          {post.name || CONTENTS.ANONYMOUS}
+        </p>
+      </div>
 
-  const fetchPosts = async () => {
-    setLoading(true);
+      <div>
+        <p className="view-label">{CONTENTS.VIEW_MODAL.MESSAGE_LABEL}</p>
+        <p className="view-message-text">{post.message}</p>
+      </div>
+
+      <div className="text-right">
+        <p className="view-date">
+          {CONTENTS.VIEW_MODAL.POSTED_ON}{" "}
+          {new Date(post.createdAt).toLocaleString()}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default function HomePage() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
+
+  const fetchMessages = async () => {
     try {
       const res = await fetch("/api/messages");
       if (res.ok) {
-        const data = await res.json();
-        setPosts(data);
+        setMessages(await res.json());
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    } catch {
+      console.error("Failed to load messages");
     }
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchMessages();
   }, []);
 
-  const handleAddSuccess = () => {
-    fetchPosts();
+  const handleViewMessage = (message: Message) => {
+    setSelectedMessage(message);
+    setIsViewModalOpen(true);
   };
 
-  const openView = (post: Post) => {
-    setSelectedPost(post);
-    setIsViewOpen(true);
+  const handleMessagePosted = () => {
+    fetchMessages();
+    setIsAddModalOpen(false);
   };
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        backgroundColor: theme.colors.background,
-        color: theme.colors.textPrimary,
-        fontFamily: theme.fonts.body,
-        padding: "2rem 1rem",
-      }}
-    >
-      <MainHeader onOpenAddModal={() => setIsAddOpen(true)} />
+    <div className="page-container">
+      <header className="page-navbar">
+  <div className="navbar-left">
+    Have any message to say?
+  </div>
+  <div className="navbar-right">
+    <Button onClick={() => setIsAddModalOpen(true)}>
+      {CONTENTS.ADD_MESSAGE_BUTTON}
+    </Button>
+  </div>
+</header>
+      <main>
+        <MessageGrid messages={messages} onViewMessage={handleViewMessage} />
+      </main>
 
-      <div className="max-w-7xl mx-auto mt-12">
-        {loading ? (
-          <p className="text-center text-xl" style={{ color: theme.colors.textSecondary }}>
-            {CONTENTS.LOADING}
-          </p>
-        ) : posts.length === 0 ? (
-          <p className="text-center text-xl" style={{ color: theme.colors.textSecondary }}>
-            {CONTENTS.EMPTY_STATE.NO_MESSAGES}
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {posts.map((post) => (
-              <MessageCard
-                key={post.id}
-                post={post}
-                onView={() => openView(post)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-      <AddMessageModal
-        isOpen={isAddOpen}
-        onClose={() => setIsAddOpen(false)}
-        onSuccess={handleAddSuccess}
-      />
+      <Modal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        title={CONTENTS.ADD_MODAL.TITLE}
+      >
+        <MessageForm
+          onSuccess={handleMessagePosted}
+          onClose={() => setIsAddModalOpen(false)}
+        />
+      </Modal>
 
-      <ViewMessageModal
-        isOpen={isViewOpen}
-        onClose={() => setIsViewOpen(false)}
-        post={selectedPost}
-      />
-    </main>
+      <Modal
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+        title={CONTENTS.VIEW_MODAL.TITLE}
+      >
+        {selectedMessage && <ViewMessageContent post={selectedMessage} />}
+      </Modal>
+    </div>
   );
 }
