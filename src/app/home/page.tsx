@@ -1,17 +1,53 @@
-// src/app/home/page.tsx
 "use client";
 
-import { useState } from "react";
-import { theme } from "./constants/theme/theme";           
-import MainHeader from "./components/mainHeader";         
+import { useState, useEffect } from "react";
+import { theme } from "./constants/theme/theme";
+import { CONTENTS } from "./constants/contents";
+import MainHeader from "./components/mainHeader";
 import AddMessageModal from "./components/AddMessageModal";
+import MessageCard from "./components/MessageCard";
+import ViewMessageModal from "./components/ViewMessageModal";
+
+interface Post {
+  id: number;
+  name: string;
+  message: string;
+  createdAt: string;
+}
 
 export default function Home() {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Temporary success handler — later we'll refresh the message list
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/messages");
+      if (res.ok) {
+        const data = await res.json();
+        setPosts(data);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   const handleAddSuccess = () => {
-    alert("Message added successfully!"); // Replace with real grid refresh later
+    fetchPosts();
+  };
+
+  const openView = (post: Post) => {
+    setSelectedPost(post);
+    setIsViewOpen(true);
   };
 
   return (
@@ -21,24 +57,42 @@ export default function Home() {
         backgroundColor: theme.colors.background,
         color: theme.colors.textPrimary,
         fontFamily: theme.fonts.body,
-        padding: "2rem",
+        padding: "2rem 1rem",
       }}
     >
-      {/* Top Banner Header with clickable button */}
-      <MainHeader onOpenAddModal={() => setIsAddModalOpen(true)} />
+      <MainHeader onOpenAddModal={() => setIsAddOpen(true)} />
 
-      {/* Main content area — grid will go here later */}
-      <div className="max-w-6xl mx-auto mt-12 text-center">
-        <p style={{ color: theme.colors.textSecondary, fontSize: "1.2rem" }}>
-          Click the link above to add your first message!
-        </p>
+      <div className="max-w-7xl mx-auto mt-12">
+        {loading ? (
+          <p className="text-center text-xl" style={{ color: theme.colors.textSecondary }}>
+            {CONTENTS.LOADING}
+          </p>
+        ) : posts.length === 0 ? (
+          <p className="text-center text-xl" style={{ color: theme.colors.textSecondary }}>
+            {CONTENTS.EMPTY_STATE.NO_MESSAGES}
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {posts.map((post) => (
+              <MessageCard
+                key={post.id}
+                post={post}
+                onView={() => openView(post)}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* The Add Message Modal */}
       <AddMessageModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
+        isOpen={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
         onSuccess={handleAddSuccess}
+      />
+
+      <ViewMessageModal
+        isOpen={isViewOpen}
+        onClose={() => setIsViewOpen(false)}
+        post={selectedPost}
       />
     </main>
   );

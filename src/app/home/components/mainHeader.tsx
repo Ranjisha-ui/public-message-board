@@ -25,19 +25,18 @@ export default function MainHeader({ onOpenAddModal }: MainHeaderProps) {
       </span>
 
       <button
-        onClick={onOpenAddModal}
-        style={{
-          color: theme.colors.primary, // Blue accent to make it stand out
-          fontWeight: 800,
-          textDecoration: "underline",
-          cursor: "pointer",
-          background: "none",
-          border: "none",
-          padding: 0,
-        }}
-      >
-        {CONTENTS.ACTIONS.OPEN_FORM}
-      </button>
+  onClick={onOpenAddModal}
+  className="px-6 py-3 rounded-xl font-semibold text-lg transition-all transform hover:-translate-y-1"
+  style={{
+    backgroundColor: theme.colors.primary,
+    color: "white",
+    boxShadow: theme.shadows.md,
+  }}
+  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = theme.colors.primaryHover}
+  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.colors.primary}
+>
+  + Add Message
+</button>
     </header>
   );
 }
