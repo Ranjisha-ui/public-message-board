@@ -1,8 +1,8 @@
-import MessageGrid from "../components/MessageGrid";
+import MessageGrid from "./MessageGrid";
 import Button from "../ui/Button";
 import { CONTENTS } from "../constants/contents";
 import { Message } from "./type";
-import AddMessageModal from "../components/addMessageModal";
+import AddMessageModal from "./addMessageModal";
 
 interface MessageGridProps {
   messages: Message[];

@@ -1,5 +1,5 @@
 import Modal from "../ui/Modal";
-import MessageForm from "../components/MessageForm";
+import MessageForm from "./MessageForm";
 import { CONTENTS } from "../constants/contents";
 
 export default function AddMessageModal({ open, onClose, onPosted }: any) {
