@@ -279,3 +279,33 @@ main {
   font-size: 0.85rem;
   color: #374151;
 }
+.app-navbar {
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 20px 0;
+}
+
+.navbar-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-title {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.page-main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px;
+}
