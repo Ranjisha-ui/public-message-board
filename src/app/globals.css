@@ -92,11 +92,15 @@ body {
 .view-name {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #0c0b0b;
 }
 
 .view-message-text {
   line-height: 1.6;
   white-space: pre-wrap;
+  color: #0c0b0b;
+  font-weight: bold;
+
 }
 
 .view-date {
@@ -236,4 +240,42 @@ main {
   font-size: 0.875rem;
   text-align: right;
   color: #666666;
+}
+/* src/app/globals.css */
+
+/* Forces the message text to be black, overriding any dark mode defaults */
+.card-message-text {
+  color: #1a1a1a !important; 
+  opacity: 1 !important;
+}
+
+/* Styling for the reply input area */
+.reply-input-area {
+  width: 100%;
+  background-color: #f3f4f6; /* gray-100 */
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 12px;
+  border: 1px solid transparent;
+  outline: none;
+  font-size: 0.875rem;
+  color: #000;
+  transition: all 0.2s ease;
+}
+
+.reply-input-area:focus {
+  background-color: #ffffff;
+  border-color: #e5e7eb; /* gray-200 */
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+}
+
+/* Styling for the submitted reply box */
+.submitted-reply-box {
+  background-color: #f9fafb;
+  border-left: 3px solid #d1d5db;
+  padding: 8px 12px;
+  margin-top: 12px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+  color: #374151;
 }

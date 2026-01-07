@@ -1,9 +1,6 @@
 // src/app/home/components/MessageForm.tsx
 
 import { useState } from "react";
-import Input from "../ui/Input";
-import Textarea from "../ui/Textarea";
-import Button from "../ui/Button";
 import { CONTENTS } from "../constants/contents";
 
 interface MessageFormProps {
@@ -12,11 +9,13 @@ interface MessageFormProps {
 }
 
 export default function MessageForm({ onSuccess, onClose }: MessageFormProps) {
+  // 1. Changed state: Removed 'feedbackType', added 'name'
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    // Basic validation
     if (!message.trim()) return;
 
     setIsLoading(true);
@@ -26,7 +25,7 @@ export default function MessageForm({ onSuccess, onClose }: MessageFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name.trim() || null,
+          name: name.trim(), // 2. Sending name instead of feedback type
           message: message.trim(),
         }),
       });
@@ -38,40 +37,55 @@ export default function MessageForm({ onSuccess, onClose }: MessageFormProps) {
         onClose();
       }
     } catch {
-      alert(CONTENTS.ERROR);
+      alert(CONTENTS.ERROR || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="message-form">
+    <div className="flex flex-col gap-6">
+      
+      {/* 3. Replaced Reaction Buttons with Name Input */}
       <div>
-        <label>{CONTENTS.ADD_MODAL.NAME_LABEL}</label>
-        <Input
-          placeholder={CONTENTS.ADD_MODAL.NAME_PLACEHOLDER}
+        <input
+          type="text"
+          className="w-full p-4 bg-gray-100 rounded-2xl border-none focus:ring-0 text-gray-800 placeholder-gray-800 text-base"
+          placeholder="Your name"
           value={name}
-          onChange={setName}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
 
+      {/* Message Input Section (Unchanged) */}
       <div>
-        <label>{CONTENTS.ADD_MODAL.MESSAGE_LABEL}</label>
-        <Textarea
-          placeholder={CONTENTS.ADD_MODAL.MESSAGE_PLACEHOLDER}
+        <textarea
+          className="w-full p-4 bg-gray-100 rounded-2xl border-none focus:ring-0 text-gray-800 placeholder-gray-800 resize-none text-base"
+          rows={3}
+          placeholder="Drop your message here..."
           value={message}
-          onChange={setMessage}
+          onChange={(e) => setMessage(e.target.value)}
+          style={{ minHeight: "100px" }}
         />
       </div>
 
-      <div className="form-actions">
-        <Button onClick={onClose}>
-          {CONTENTS.CLOSE_BUTTON}
-        </Button>
+      {/* Action Buttons (Unchanged) */}
+      <div className="flex gap-4 pt-2">
+        <button
+          onClick={onClose}
+          className="flex-1 py-3.5 rounded-full bg-gray-100 text-black font-bold text-lg hover:bg-gray-200 transition-colors"
+        >
+          Cancel
+        </button>
 
-        <Button onClick={handleSubmit} disabled={isLoading}>
-          {isLoading ? CONTENTS.FORM.SUBMITTING : CONTENTS.SUBMIT_BUTTON}
-        </Button>
+        <button
+          onClick={handleSubmit}
+          disabled={isLoading}
+          className="flex-1 py-3.5 rounded-full bg-yellow-400 text-black font-bold text-lg hover:bg-yellow-500 transition-colors disabled:opacity-50"
+          style={{ backgroundColor: "#FCE344" }} 
+        >
+          {isLoading ? "..." : "Submit"}
+        </button>
       </div>
     </div>
   );
