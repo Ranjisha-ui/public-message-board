@@ -2,7 +2,7 @@
 
 
 
-import { CONTENTS } from "../constants/contents";
+import { CONTENTS } from "../constants/contents/index";
 
 
 
@@ -29,9 +29,7 @@ interface MessageCardProps {
 const icons = [
 
   "/icons/i1.png", "/icons/i2.png", "/icons/i3.png", "/icons/i4.png",
-
   "/icons/i5.png", "/icons/i6.png", "/icons/i7.png", "/icons/i8.png",
-
   "/icons/i9.png", "/icons/i10.png",
 
 ];
@@ -147,8 +145,6 @@ export default function MessageCard({
         {name || CONTENTS.ANONYMOUS}
 
       </h3>
-
-
 
       {/* Body Text */}
 

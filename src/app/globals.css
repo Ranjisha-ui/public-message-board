@@ -108,13 +108,54 @@ body {
   color: #0c0b0b;
 }
 /* Nav Bar */
-.page-navbar {
+.nav-container {
+  background-color: #F88379; /* Salmon color from reference */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: #f79494; /* white background */
-  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 40px;
+  height: 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.nav-title {
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Add New Message Button */
+.btn-primary {
+  background-color: #4F46E5; /* Indigo/Blue color */
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #4338CA;
+}
+
+/* Main Content Wrapper */
+.main-wrapper {
+  padding: 32px 40px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Grid Override (Updating your existing MessageGrid logic) */
+.message-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
 }
 
 .navbar-left {
@@ -308,4 +349,8 @@ main {
   max-width: 1440px;
   margin: 0 auto;
   padding: 40px;
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

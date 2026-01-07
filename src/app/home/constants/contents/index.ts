@@ -31,8 +31,13 @@ export const CONTENTS = {
   // Message Grid / List
   GRID: {
     NO_MESSAGES: "No messages yet. Be the first to post one!",
+  VIEW_MODAL: {
+    TITLE: "Message Details",
+    FROM_LABEL: "From",
+    MESSAGE_LABEL: "Message",
+    POSTED_ON: "Posted on",
   },
-
+  },
   // Success / Error messages (optional, for later)
   SUCCESS: "Message posted successfully!",
   ERROR: "Something went wrong. Please try again.",
@@ -41,4 +46,5 @@ export const CONTENTS = {
     SUBMIT: "Submit",
     SUBMITTING: "Submitting...",
   },
+
 } as const;
