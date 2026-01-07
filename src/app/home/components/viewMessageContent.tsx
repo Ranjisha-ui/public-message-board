@@ -1,5 +1,5 @@
 import { Message } from "./type";
-import { CONTENTS } from "../../constants/contents";
+import { CONTENTS } from "../constants/contents";
 
 // View-only component (NO styling here)
 export default function ViewMessageContent({ post }: { post: Message }) {

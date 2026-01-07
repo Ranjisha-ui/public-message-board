@@ -1,7 +1,7 @@
-import Modal from "../../ui/Modal";
+import Modal from "../ui/Modal";
 
 import ViewMessageContent from "./viewMessageContent";
-import { CONTENTS } from "../../constants/contents";
+import { CONTENTS } from "../constants/contents";
 import { Message } from "./type";
 
 export default function ViewMessageModal({ open, onClose, message }: { open: boolean; onClose: () => void; message: Message | null }) {

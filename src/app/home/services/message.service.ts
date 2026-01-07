@@ -1,4 +1,4 @@
-import {Message} from "../components/messageBoard/type";
+import {Message} from "../components/type";
 
 const API_URL = "/api/messages";
 

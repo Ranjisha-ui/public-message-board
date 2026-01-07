@@ -11,6 +11,8 @@ export const CONTENTS = {
   CLOSE_BUTTON: "Close",
   SUBMIT_BUTTON: "Submit",
 
+  // Form placeholders and labels
+  
   // Add Message Modal
   ADD_MODAL: {
     TITLE: "Add New Message",
@@ -18,7 +20,9 @@ export const CONTENTS = {
     NAME_PLACEHOLDER: "Enter your name...",
     MESSAGE_LABEL: "Message",
     MESSAGE_PLACEHOLDER: "Write your message here...",
+
   },
+  
 
   // View Message Modal
   VIEW_MODAL: {
@@ -38,7 +42,13 @@ export const CONTENTS = {
   ERROR: "Something went wrong. Please try again.",
   ANONYMOUS: "Anonymous",
   FORM: {
-    SUBMIT: "Submit",
-    SUBMITTING: "Submitting...",
-  },
+  MESSAGE_PLACEHOLDER: "Have any message to say?",
+  CANCEL_BUTTON: "Cancel",
+  SUBMIT_BUTTON: "Submit",
+
+  // existing keys — keep them
+  SUBMIT: "Submit",
+  SUBMITTING: "Submitting...",
+},
+
 } as const;

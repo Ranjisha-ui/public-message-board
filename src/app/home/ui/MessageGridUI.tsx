@@ -1,8 +1,6 @@
-// src/app/home/components/MessageGrid.tsx
-
-import MessageCard from "./MessageCard";
-import { CONTENTS } from "../../constants/contents";
-import { theme } from "../../theme";
+import { CONTENTS } from "../constants/contents";
+import { theme } from "../theme";
+import MessageCard from "../components/MessageCard";
 
 interface Message {
   id: number;
@@ -11,15 +9,15 @@ interface Message {
   createdAt: string;
 }
 
-interface MessageGridProps {
+interface MessageGridUIProps {
   messages: Message[];
   onViewMessage: (message: Message) => void;
 }
 
-export default function MessageGrid({
+export default function MessageGridUI({
   messages,
   onViewMessage,
-}: MessageGridProps) {
+}: MessageGridUIProps) {
   if (messages.length === 0) {
     return (
       <div style={{ textAlign: "center", padding: "48px 0" }}>
@@ -31,15 +29,7 @@ export default function MessageGrid({
   }
 
   return (
-    <div
-      className="grid w-full"
-      style={{
-        // Responsive grid matching the reference layout
-        gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", 
-        gap: "24px", 
-        paddingBottom: "48px"
-      }}
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-12 w-full">
       {messages.map((msg) => (
         <MessageCard
           key={msg.id}

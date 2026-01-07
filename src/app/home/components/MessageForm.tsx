@@ -1,9 +1,9 @@
 // src/app/home/components/MessageForm.tsx
 
 import { useState } from "react";
-import { CONTENTS } from "../../constants/contents";
-import { createMessage } from "../../services/message.service";
-import MessageFormUI from "../../ui/MessageFormUI";
+import { CONTENTS } from "../constants/contents";
+import { createMessage } from "../services/message.service";
+import MessageFormUI from "../ui/MessageFormUI";
 interface MessageFormProps {
   onSuccess: () => void;
   onClose: () => void;
