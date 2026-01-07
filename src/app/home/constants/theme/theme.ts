@@ -13,7 +13,7 @@ export const theme = {
 
     border: "#e5e7eb",
 
-    overlay: "rgba(225, 214, 214, 0.5)",
+    overlay: "rgba(12, 11, 11, 0.5)",
     white: "#ffffff",
   },
 

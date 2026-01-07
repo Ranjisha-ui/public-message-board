@@ -32,10 +32,12 @@ export default function MessageGrid({
 
   return (
     <div
+      className="grid w-full"
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: "32px",
+        // Responsive grid matching the reference layout
+        gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", 
+        gap: "24px", 
+        paddingBottom: "48px"
       }}
     >
       {messages.map((msg) => (
