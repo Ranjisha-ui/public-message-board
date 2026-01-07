@@ -17,9 +17,7 @@ interface Message {
   message: string;
   createdAt: string;
 }
-<h1 className="nav-left">{CONTENTS.APP_TITLE}</h1>
 
-// View-only component (NO styling here)
 function ViewMessageContent({ post }: { post: Message }) {
   return (
     <div className="view-message">
@@ -77,39 +75,42 @@ export default function HomePage() {
   };
 
   return (
-    <div className="page-container">
-      <header className="page-navbar">
-  <div className="navbar-left">
-    Have any message to say?
-  </div>
-  <div className="navbar-right">
-    <Button onClick={() => setIsAddModalOpen(true)}>
-      {CONTENTS.ADD_MESSAGE_BUTTON}
-    </Button>
-  </div>
-</header>
-      <main>
+    <>
+      {/* Updated Navbar - matches reference exactly */}
+      <nav className="app-navbar">
+        <div className="navbar-container">
+          <h1 className="navbar-title">
+            {CONTENTS.APP_TITLE} {/* or directly "Have any message to say?" */}
+          </h1>
+          <Button onClick={() => setIsAddModalOpen(true)}>
+            {CONTENTS.ADD_MESSAGE_BUTTON}
+          </Button>
+        </div>
+      </nav>
+
+      {/* Main content */}
+      <main className="page-main">
         <MessageGrid messages={messages} onViewMessage={handleViewMessage} />
-      </main>
 
-      <Modal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        title={CONTENTS.ADD_MODAL.TITLE}
-      >
-        <MessageForm
-          onSuccess={handleMessagePosted}
+        <Modal
+          isOpen={isAddModalOpen}
           onClose={() => setIsAddModalOpen(false)}
-        />
-      </Modal>
+          title={CONTENTS.ADD_MODAL.TITLE}
+        >
+          <MessageForm
+            onSuccess={handleMessagePosted}
+            onClose={() => setIsAddModalOpen(false)}
+          />
+        </Modal>
 
-      <Modal
-        isOpen={isViewModalOpen}
-        onClose={() => setIsViewModalOpen(false)}
-        title={CONTENTS.VIEW_MODAL.TITLE}
-      >
-        {selectedMessage && <ViewMessageContent post={selectedMessage} />}
-      </Modal>
-    </div>
+        <Modal
+          isOpen={isViewModalOpen}
+          onClose={() => setIsViewModalOpen(false)}
+          title={CONTENTS.VIEW_MODAL.TITLE}
+        >
+          {selectedMessage && <ViewMessageContent post={selectedMessage} />}
+        </Modal>
+      </main>
+    </>
   );
 }
