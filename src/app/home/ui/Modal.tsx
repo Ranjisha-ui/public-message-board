@@ -1,6 +1,6 @@
 // src/app/home/ui/Modal.tsx
 
-import { theme } from "../constants/theme/theme";
+import { theme } from "../theme";
 
 interface ModalProps {
   isOpen: boolean;

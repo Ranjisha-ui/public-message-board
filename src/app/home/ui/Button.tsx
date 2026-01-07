@@ -1,6 +1,6 @@
 // src/app/home/ui/Button.tsx
 
-import { theme } from "../constants/theme/theme";
+import { theme } from "../theme";
 
 interface ButtonProps {
   onClick?: () => void;

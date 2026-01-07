@@ -1,6 +1,6 @@
 // src/app/home/ui/Textarea.tsx
 
-import { theme } from "../constants/theme/theme";
+import { theme } from "../theme";
 
 interface TextareaProps {
   placeholder?: string;

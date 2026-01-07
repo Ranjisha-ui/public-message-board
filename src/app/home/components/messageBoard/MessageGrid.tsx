@@ -1,8 +1,8 @@
 // src/app/home/components/MessageGrid.tsx
 
 import MessageCard from "./MessageCard";
-import { CONTENTS } from "../constants/contents";
-import { theme } from "../constants/theme/theme";
+import { CONTENTS } from "../../constants/contents";
+import { theme } from "../../theme";
 
 interface Message {
   id: number;

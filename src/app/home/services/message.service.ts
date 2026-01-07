@@ -1,8 +1,8 @@
-import {Message} from "../api/messages/types/message";
+import {Message} from "../components/messageBoard/type";
 
 const API_URL = "/api/messages";
 
-export async function fetchMessages(): Promise<Message[]> {
+export async function loadMessages(): Promise<Message[]> {
   const response = await fetch(API_URL,{cache: 'no-store'});
   if (!response.ok) {
     throw new Error("Failed to fetch messages");
