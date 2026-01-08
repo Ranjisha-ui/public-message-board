@@ -1,40 +1,74 @@
-HEAD
-# public-message-board
-Minimal full-stack message board using Next.js and Prisma
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Public Message Board
 
-## Getting Started
+A minimal yet professional full-stack **Public Message Board** application built using
+Next.js 14, Prisma, and PostgreSQL.  
+The project emphasizes **clean architecture, UI structure, serverless deployment,
+and engineering discipline**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 Project Objective
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build and deploy a production-quality full-stack application with focus on:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Architecture design
+- UI structure and reusability
+- Serverless backend implementation
+- Cloud deployment best practices
+- Clean Git and documentation standards
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔗 Live Deployment
 
-To learn more about Next.js, take a look at the following resources:
+👉 **Live URL:**  public-message-board.vercel.app  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Replace the above link with your actual Vercel deployment URL.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧩 Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 14** (App Router)
+- **Node.js 20**
+- **Prisma ORM**
+- **PostgreSQL**
+- **Tailwind CSS**
+- **Vercel** (Serverless deployment)
+- **Linux (WSL)**
+- **Git & GitHub**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-a25756a (Initial commit from Create Next App)
+---
+
+## 🖥 Application Overview
+
+### Route: `/home`
+
+- Anyone can view messages
+- Anyone can add a message
+- All interactions handled via **modals**
+- Messages displayed in a **responsive grid**
+- Clean, minimal, and professional UI
+
+---
+
+## 🧭 How to Use the Application
+
+1. Open the application at `/home`
+2. Click **Add Message**
+3. Enter your name and message
+4. Click **Add**
+5. Message appears in the message grid
+6. Click **View** on any card to see the full message
+
+---
+
+## 🗃 Database Schema (Minimal)
+
+```prisma
+model Message {
+  id        String   @id @default(uuid())
+  name      String
+  content   String
+  createdAt DateTime @default(now())
+}
